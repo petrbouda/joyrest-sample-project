@@ -1,0 +1,70 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.joyrest</groupId>
+    <artifactId>joyrest-sample-project</artifactId>
+    <version>1.0</version>
+
+    <name>joyrest-sample-project</name>
+
+    <developers>
+        <developer>
+            <name>Petr Bouda</name>
+            <email>bouda.petr@gmail.com</email>
+        </developer>
+    </developers>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <joyrest.version>1.2-SNAPSHOT</joyrest.version>
+        <joyrest-unit.version>1.0-SNAPSHOT</joyrest-unit.version>
+    </properties>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.joyrest</groupId>
+            <artifactId>joyrest-hk2</artifactId>
+            <version>${joyrest.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.joyrest</groupId>
+            <artifactId>joyrest-grizzly</artifactId>
+            <version>${joyrest.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.joyrest</groupId>
+            <artifactId>joyrest-utils</artifactId>
+            <version>${joyrest.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.tinylog</groupId>
+            <artifactId>slf4j-binding</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.joyrest</groupId>
+            <artifactId>joyrest-unit-tests</artifactId>
+            <version>${joyrest-unit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
