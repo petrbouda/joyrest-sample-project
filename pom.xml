@@ -20,8 +20,11 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
+        <logback.version>1.1.2</logback.version>
+
         <joyrest.version>1.2-SNAPSHOT</joyrest.version>
         <joyrest-unit.version>1.0-SNAPSHOT</joyrest-unit.version>
+        <junit.version>4.12</junit.version>
     </properties>
 
     <distributionManagement>
@@ -55,15 +58,22 @@
         </dependency>
 
         <dependency>
-            <groupId>org.tinylog</groupId>
-            <artifactId>slf4j-binding</artifactId>
-            <version>1.0</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.joyrest</groupId>
             <artifactId>joyrest-unit-tests</artifactId>
             <version>${joyrest-unit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

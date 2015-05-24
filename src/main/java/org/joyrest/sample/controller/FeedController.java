@@ -17,7 +17,6 @@ import org.joyrest.sample.services.FeedService;
 
 public class FeedController extends TypedControllerConfiguration {
 
-	@Inject
 	FeedService feedService;
 
 	@Override
@@ -46,4 +45,8 @@ public class FeedController extends TypedControllerConfiguration {
 			.produces(JSON);
 	}
 
+	@Inject
+	public void setFeedService(FeedService feedService) {
+		this.feedService = feedService;
+	}
 }
