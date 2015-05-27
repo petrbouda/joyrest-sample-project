@@ -12,7 +12,10 @@ public class FeedServiceImpl implements FeedService {
 
 	@Override
 	public Feed save(Feed feed) {
-		return feed;
+		return new Feed(
+			feed.getTitle() + " - " + 1,
+			feed.getDescription() + " - " + 1,
+			new Date());
 	}
 
 	@Override
