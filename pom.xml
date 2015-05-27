@@ -22,8 +22,8 @@
 
         <logback.version>1.1.2</logback.version>
 
-        <joyrest.version>1.2-SNAPSHOT</joyrest.version>
-        <joyrest-unit.version>1.0-SNAPSHOT</joyrest-unit.version>
+        <joyrest.version>1.2</joyrest.version>
+        <joyrest-unit.version>1.0</joyrest-unit.version>
         <junit.version>4.12</junit.version>
     </properties>
 
