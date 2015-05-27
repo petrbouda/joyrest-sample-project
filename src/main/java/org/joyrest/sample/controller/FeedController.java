@@ -21,7 +21,7 @@ public class FeedController extends TypedControllerConfiguration {
 
 	@Override
 	protected void configure() {
-		setGlobalPath("feeds");
+		setControllerPath("feeds");
 
 		post((req, resp) -> {
 			Feed feed = feedService.save(req.getEntity());
