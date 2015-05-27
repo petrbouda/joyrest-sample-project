@@ -20,7 +20,7 @@ import org.joyrest.test.unit.model.MockRequest;
 import org.joyrest.test.unit.model.MockResponse;
 import org.junit.Test;
 
-@TestedController(value = FeedController.class, globalPath = "feeds")
+@TestedController(value = FeedController.class, controllerPath = "feeds")
 public class FeedControllerAnnotationTest extends JoyrestUnitTest {
 
 	@Mock
