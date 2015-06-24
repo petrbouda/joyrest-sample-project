@@ -15,12 +15,12 @@ import org.easymock.TestSubject;
 import org.joyrest.model.http.HttpStatus;
 import org.joyrest.sample.model.Feed;
 import org.joyrest.sample.services.FeedService;
-import org.joyrest.test.unit.JoyrestUnitTest;
+import org.joyrest.test.unit.ControllerUnitTest;
 import org.joyrest.test.unit.model.MockRequest;
 import org.joyrest.test.unit.model.MockResponse;
 import org.junit.Test;
 
-public class FeedControllerMocksTest extends JoyrestUnitTest {
+public class FeedControllerMocksTest extends ControllerUnitTest {
 
 	@TestSubject
 	private FeedController feedController = new FeedController();

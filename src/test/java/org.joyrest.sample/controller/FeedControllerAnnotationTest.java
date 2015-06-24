@@ -14,14 +14,14 @@ import org.easymock.Mock;
 import org.joyrest.model.http.HttpStatus;
 import org.joyrest.sample.model.Feed;
 import org.joyrest.sample.services.FeedService;
-import org.joyrest.test.unit.JoyrestUnitTest;
+import org.joyrest.test.unit.ControllerUnitTest;
 import org.joyrest.test.unit.annotation.TestedController;
 import org.joyrest.test.unit.model.MockRequest;
 import org.joyrest.test.unit.model.MockResponse;
 import org.junit.Test;
 
 @TestedController(value = FeedController.class, controllerPath = "feeds")
-public class FeedControllerAnnotationTest extends JoyrestUnitTest {
+public class FeedControllerAnnotationTest extends ControllerUnitTest {
 
 	@Mock
 	private FeedService service;

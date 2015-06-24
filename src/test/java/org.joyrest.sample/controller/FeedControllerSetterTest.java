@@ -10,12 +10,12 @@ import java.util.Date;
 import org.joyrest.model.http.HttpStatus;
 import org.joyrest.sample.model.Feed;
 import org.joyrest.sample.services.FeedServiceImpl;
-import org.joyrest.test.unit.JoyrestUnitTest;
+import org.joyrest.test.unit.ControllerUnitTest;
 import org.joyrest.test.unit.model.MockRequest;
 import org.joyrest.test.unit.model.MockResponse;
 import org.junit.Test;
 
-public class FeedControllerSetterTest extends JoyrestUnitTest {
+public class FeedControllerSetterTest extends ControllerUnitTest {
 
 	@Override
 	public void configure() {
