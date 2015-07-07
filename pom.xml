@@ -58,6 +58,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.joyrest</groupId>
+            <artifactId>joyrest-oauth2</artifactId>
+            <version>${joyrest.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
