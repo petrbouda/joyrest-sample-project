@@ -65,6 +65,12 @@ public class ApplicationBinder extends AbstractBinder {
                         .authorizedGrantTypes("client_credentials")
                         .authorities("USER")
                         .scopes("read", "write")
+                        .secret("123456")
+                    .and()
+                    .withClient("clientapp3")
+                        .authorizedGrantTypes("authorization_code")
+                        .authorities("USER")
+                        .scopes("read", "write")
                         .secret("123456");
             // @formatter:on
             ClientDetailsService clientDetailsService = clients.and().build();
