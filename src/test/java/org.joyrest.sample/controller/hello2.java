@@ -18,10 +18,5 @@ package org.joyrest.sample.controller;
 /**
  * Created by pbouda on 7/22/15.
  */
-public class hello {
-
-    public static void main(String[] args) {
-
-    }
-
+public class hello2 {
 }
