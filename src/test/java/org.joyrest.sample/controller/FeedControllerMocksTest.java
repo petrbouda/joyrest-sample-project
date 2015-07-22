@@ -47,6 +47,7 @@ public class FeedControllerMocksTest extends ControllerUnitTest {
 	public void configure() {
 		setController(feedController);
 		setGlobalPath("feeds");
+
 	}
 
 	@Test
