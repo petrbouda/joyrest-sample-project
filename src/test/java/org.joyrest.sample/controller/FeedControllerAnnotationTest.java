@@ -43,6 +43,9 @@ public class FeedControllerAnnotationTest extends ControllerUnitTest {
 
 	@Test
 	public void testGetAll() {
+
+
+
 		MockRequest<?> request = new MockRequest<>();
 		MockResponse<Feed> response = new MockResponse<>();
 
