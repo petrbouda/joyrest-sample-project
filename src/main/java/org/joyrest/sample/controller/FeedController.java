@@ -21,6 +21,7 @@ import static org.joyrest.model.http.MediaType.JSON;
 import static org.joyrest.routing.entity.RequestType.Req;
 import static org.joyrest.routing.entity.ResponseCollectionType.RespList;
 import static org.joyrest.routing.entity.ResponseType.Resp;
+import static org.joyrest.sample.controller.SecurityRoles.ADMIN;
 
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class FeedController extends TypedControllerConfiguration {
 	@Override
 	protected void configure() {
 		setControllerPath("feeds");
+		setRoles(ADMIN);
 
 		post((req, resp) -> {
 			Feed feed = feedService.save(req.getEntity());
