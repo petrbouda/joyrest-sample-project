@@ -29,6 +29,9 @@ import org.joyrest.routing.ControllerConfiguration;
 import org.joyrest.sample.controller.FeedController;
 import org.joyrest.sample.services.FeedService;
 import org.joyrest.sample.services.FeedServiceImpl;
+import org.springframework.security.config.annotation.authentication.configurers.provisioning.InMemoryUserDetailsManagerConfigurer;
+import org.springframework.security.config.annotation.authentication.configurers.provisioning.UserDetailsManagerConfigurer;
+import org.springframework.security.config.annotation.authentication.configurers.userdetails.UserDetailsServiceConfigurer;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,6 +40,7 @@ import org.springframework.security.oauth2.config.annotation.builders.InMemoryCl
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 
 import static java.util.Collections.singleton;
 
@@ -45,8 +49,7 @@ public class ApplicationBinder extends AbstractBinder {
     @Override
     protected void configure() {
         bind(FeedServiceImpl.class)
-            .to(new TypeLiteral<FeedService>() {
-            })
+            .to(new TypeLiteral<FeedService>() { })
             .in(Singleton.class);
 
         bind(FeedController.class)
@@ -65,41 +68,49 @@ public class ApplicationBinder extends AbstractBinder {
         private final AuthorizationServerConfiguration authorizationServerConfiguration;
 
         public OAuth2Binder() throws Exception {
-            ClientDetailsServiceConfigurer clients =
-                new ClientDetailsServiceConfigurer(new InMemoryClientDetailsServiceBuilder());
             // @formatter:off
-            clients
-                .inMemory()
-                    .withClient("clientapp")
-                        .authorizedGrantTypes("password", "refresh_token")
-                        .authorities("USER")
-                        .scopes("read", "write")
-                        .secret("123456")
-                    .and()
-                    .withClient("clientapp2")
-                        .authorizedGrantTypes("client_credentials")
-                        .authorities("USER")
-                        .scopes("read", "write")
-                        .secret("123456")
-                    .and()
-                    .withClient("clientapp3")
-                        .authorizedGrantTypes("authorization_code")
-                        .authorities("USER")
-			            .redirectUris("http://localhost:5000/login.html", "http://localhost:5000/diff_login.html")
-			            .scopes("read", "write")
-	                    .autoApprove(true)
-				        .secret("123456");
+	        ClientDetailsService clients = new ClientDetailsServiceConfigurer(new InMemoryClientDetailsServiceBuilder())
+		        .inMemory()
+			        .withClient("clientapp")
+				        .authorizedGrantTypes("password", "refresh_token")
+				        .authorities("USER")
+				        .scopes("read", "write")
+				        .secret("123456")
+			        .and()
+			        .withClient("clientapp2")
+				        .authorizedGrantTypes("client_credentials")
+				        .authorities("USER")
+				        .scopes("read", "write")
+			            .secret("123456")
+			        .and()
+			        .withClient("clientapp3")
+				        .authorizedGrantTypes("authorization_code")
+				        .authorities("USER")
+				        .redirectUris(
+					        "http://localhost:5000/login.html",
+					        "http://localhost:5000/diff_login.html")
+				        .scopes("read", "write")
+				        .autoApprove(true)
+			            .secret("123456")
+	                .and().build();
+
+	        UserDetailsManager users = new InMemoryUserDetailsManagerConfigurer<>()
+		        .withUser("roy")
+		            .password("spring")
+		            .roles("USER")
+	            .and()
+	            .withUser("craig")
+			        .password("spring")
+			        .roles("ADMIN")
+	            .and()
+	            .withUser("greg")
+	                .password("spring")
+	                .roles("GUEST")
+		        .and()
+				.getUserDetailsService();
+
+            this.authorizationServerConfiguration = new AuthorizationServerConfiguration(users, clients);
             // @formatter:on
-            ClientDetailsService clientDetailsService = clients.and().build();
-
-            List<UserDetails> users = new ArrayList<>();
-            users.add(new User("roy", "spring", singleton(new SimpleGrantedAuthority("USER"))));
-            users.add(new User("craig", "spring", singleton(new SimpleGrantedAuthority("ADMIN"))));
-            users.add(new User("greg", "spring", singleton(new SimpleGrantedAuthority("GUEST"))));
-            UserDetailsService userDetailsService = new InMemoryUserDetailsManager(users);
-
-            this.authorizationServerConfiguration =
-                new AuthorizationServerConfiguration(userDetailsService, clientDetailsService);
         }
 
         @Override
