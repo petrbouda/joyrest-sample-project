@@ -85,8 +85,10 @@ public class ApplicationBinder extends AbstractBinder {
                     .withClient("clientapp3")
                         .authorizedGrantTypes("authorization_code")
                         .authorities("USER")
-                        .scopes("read", "write")
-                        .secret("123456");
+			            .redirectUris("http://localhost:5000/login.html", "http://localhost:5000/diff_login.html")
+			            .scopes("read", "write")
+	                    .autoApprove(true)
+				        .secret("123456");
             // @formatter:on
             ClientDetailsService clientDetailsService = clients.and().build();
 
