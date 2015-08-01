@@ -15,14 +15,8 @@
  */
 package org.joyrest.sample;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Singleton;
-
 import org.glassfish.hk2.api.TypeLiteral;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
-
 import org.joyrest.exception.type.InvalidConfigurationException;
 import org.joyrest.oauth2.initializer.AuthorizationServerConfiguration;
 import org.joyrest.routing.ControllerConfiguration;
@@ -30,45 +24,39 @@ import org.joyrest.sample.controller.FeedController;
 import org.joyrest.sample.services.FeedService;
 import org.joyrest.sample.services.FeedServiceImpl;
 import org.springframework.security.config.annotation.authentication.configurers.provisioning.InMemoryUserDetailsManagerConfigurer;
-import org.springframework.security.config.annotation.authentication.configurers.provisioning.UserDetailsManagerConfigurer;
-import org.springframework.security.config.annotation.authentication.configurers.userdetails.UserDetailsServiceConfigurer;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.builders.InMemoryClientDetailsServiceBuilder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 
-import static java.util.Collections.singleton;
+import javax.inject.Singleton;
 
 public class ApplicationBinder extends AbstractBinder {
 
-    @Override
-    protected void configure() {
-        bind(FeedServiceImpl.class)
-            .to(new TypeLiteral<FeedService>() { })
-            .in(Singleton.class);
+	@Override
+	protected void configure() {
+		bind(FeedServiceImpl.class)
+			.to(new TypeLiteral<FeedService>() {
+			})
+			.in(Singleton.class);
 
-        bind(FeedController.class)
-            .to(ControllerConfiguration.class)
-            .in(Singleton.class);
+		bind(FeedController.class)
+			.to(ControllerConfiguration.class)
+			.in(Singleton.class);
 
-        try {
-            install(new OAuth2Binder());
-        } catch (Exception e) {
-            throw new InvalidConfigurationException("An error occurred during configuring OAuth2 Security.", e);
-        }
-    }
+		try {
+			install(new OAuth2Binder());
+		} catch (Exception e) {
+			throw new InvalidConfigurationException("An error occurred during configuring OAuth2 Security.", e);
+		}
+	}
 
-    private static class OAuth2Binder extends AbstractBinder {
+	private static class OAuth2Binder extends AbstractBinder {
 
-        private final AuthorizationServerConfiguration authorizationServerConfiguration;
+		private final AuthorizationServerConfiguration authorizationServerConfiguration;
 
-        public OAuth2Binder() throws Exception {
-            // @formatter:off
+		public OAuth2Binder() throws Exception {
+			// @formatter:off
 	        ClientDetailsService clients = new ClientDetailsServiceConfigurer(new InMemoryClientDetailsServiceBuilder())
 		        .inMemory()
 			        .withClient("clientapp")
@@ -111,12 +99,12 @@ public class ApplicationBinder extends AbstractBinder {
 
             this.authorizationServerConfiguration = new AuthorizationServerConfiguration(users, clients);
             // @formatter:on
-        }
+		}
 
-        @Override
-        protected void configure() {
-            bind(authorizationServerConfiguration)
-                .to(AuthorizationServerConfiguration.class);
-        }
-    }
+		@Override
+		protected void configure() {
+			bind(authorizationServerConfiguration)
+				.to(AuthorizationServerConfiguration.class);
+		}
+	}
 }
