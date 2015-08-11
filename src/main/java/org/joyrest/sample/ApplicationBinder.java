@@ -43,6 +43,6 @@ public class ApplicationBinder extends AbstractBinder {
 			.to(ControllerConfiguration.class)
 			.in(Singleton.class);
 
-		install(new JdbcOAuthBinder());
+		install(new InMemoryOAuthBinder());
 	}
 }

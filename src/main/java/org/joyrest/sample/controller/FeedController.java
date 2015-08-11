@@ -27,6 +27,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.joyrest.routing.Route;
 import org.joyrest.routing.TypedControllerConfiguration;
 import org.joyrest.sample.model.Feed;
 import org.joyrest.sample.services.FeedService;
@@ -38,7 +39,7 @@ public class FeedController extends TypedControllerConfiguration {
 	@Override
 	protected void configure() {
 		setControllerPath("feeds");
-		setRoles(ADMIN);
+		setRoles("ADMIN");
 
 		post((req, resp) -> {
 			Feed feed = feedService.save(req.getEntity());
